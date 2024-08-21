@@ -7,4 +7,5 @@ graphpi/data
 pangolin/bin
 pangolin/data
 PimPam/data
-PimPam/results
+PimPam/result
+PimPam/obj

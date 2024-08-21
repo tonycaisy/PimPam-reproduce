@@ -5,7 +5,6 @@ int col_idx[M];
 int main() {
     int n, m;
     scanf("%d%d", &n, &m);
-    printf("%d %d\n", n, m >> 1);
     for (int i = 0; i < n; i++) {
         scanf("%d", row_ptr + i);
     }

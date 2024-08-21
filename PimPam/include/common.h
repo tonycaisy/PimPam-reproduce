@@ -19,7 +19,7 @@
 #define N (1<<5)
 #define M (1<<5)
 #elif defined(WV)
-#define DATA_NAME "Wiki-Vote"
+#define DATA_NAME "wiki-Vote"
 #define N (1<<13)
 #define M (1<<18)
 #elif defined(PP)
@@ -27,7 +27,7 @@
 #define N (1<<14)
 #define M (1<<17)
 #elif defined(CA)
-#define DATA_NAME "CA-AstroPh"
+#define DATA_NAME "ca-AstroPh"
 #define N (1<<15)
 #define M (1<<19)
 #elif defined(YT)
@@ -39,7 +39,7 @@
 #define N (1<<22)
 #define M (1<<26)
 #elif defined(LJ)
-#define DATA_NAME "soc-LiveJournall"
+#define DATA_NAME "soc-LiveJournal1"
 #define N (1<<23)
 #define M (1<<27)
 #else
@@ -106,7 +106,9 @@
 #define BITMAP_SIZE 32  // 1024 bits
 #define BUF_SIZE 32
 #define MRAM_BUF_SIZE 32768
+#ifndef BRANCH_LEVEL_THRESHOLD
 #define BRANCH_LEVEL_THRESHOLD 16
+#endif
 #define PARTITION_M ((1<<22)/sizeof(node_t))
 
 typedef struct Graph {
