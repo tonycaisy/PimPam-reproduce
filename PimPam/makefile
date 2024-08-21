@@ -9,7 +9,7 @@ BUILD_DIR := bin
 OBJ_DIR := obj
 INC_DIR := include
 
-NR_DPUS ?= 2554
+NR_DPUS ?= 128
 NR_TASKLETS ?= 16
 GRAPH ?= WV
 PATTERN ?= CLIQUE3
@@ -36,19 +36,19 @@ all_before:
 	@mkdir -p result
 
 ${BUILD_DIR}/host: ${OBJ_DIR}/${HOST_DIR}/main.o ${OBJ_DIR}/${HOST_DIR}/partition.o ${OBJ_DIR}/${HOST_DIR}/mine.o ${OBJ_DIR}/${HOST_DIR}/set_op.o ${OBJ_DIR}/${HOST_DIR}/heap.o
-	@${LINK} $^ -o $@  ${HOST_LFLAGS}
+	@${LINK} $^ -o $@ ${HOST_LFLAGS}
 
 ${BUILD_DIR}/dpu: ${OBJ_DIR}/${DPU_DIR}/main.o ${OBJ_DIR}/${DPU_DIR}/set_op.o ${OBJ_DIR}/${DPU_DIR}/${PATTERN}.o
-	@${DPULINK} $^ -o $@ ${DPU_LFLAGS}
+	@${DPULINK} ${DPU_LFLAGS} $^ -o $@
 
 ${BUILD_DIR}/dpu_alloc: ${OBJ_DIR}/${DPU_DIR}/partition.o
-	@${DPULINK} $^ -o $@ ${DPU_LFLAGS}
+	@${DPULINK} ${DPU_LFLAGS} $^ -o $@
 
 ${OBJ_DIR}/${HOST_DIR}/%.o: ${HOST_DIR}/%.c ${INC_FILE}
-	@${CC} $< -o $@ ${HOST_CCFLAGS}
+	@${CC} ${HOST_CCFLAGS} $< -o $@
 
 ${OBJ_DIR}/${DPU_DIR}/%.o: ${DPU_DIR}/%.c ${INC_FILE}
-	@${DPUCC} $< -o $@ ${DPU_CCFLAGS} 
+	@${DPUCC} ${DPU_CCFLAGS}  $< -o $@
 
 clean:
 	@rm -rf ${BUILD_DIR} ${OBJ_DIR}
