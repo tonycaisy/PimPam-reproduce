@@ -1,0 +1,10 @@
+data/
+data-cleaned/
+bin/
+results/
+graphpi/build
+graphpi/data
+pangolin/bin
+pangolin/data
+PimPam/data
+PimPam/results
