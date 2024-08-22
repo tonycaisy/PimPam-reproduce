@@ -213,7 +213,11 @@ static void data_allocate(bitmap_t bitmap) {
         allocate_rank[i] = i;
     }
     for (node_t i = 0; i < global_g->n; i++) {
+#ifdef NO_LOAD_BALANCE
+        workload[i] = 1;
+#else
         workload[i] = predict_workload(global_g, i);
+#endif
     }
     qsort(allocate_rank, global_g->n, sizeof(node_t), workload_cmp);
 

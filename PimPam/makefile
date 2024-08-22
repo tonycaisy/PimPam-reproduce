@@ -96,15 +96,15 @@ test_all:
 	@OVERRIDE=${OVERRIDE} GRAPH=LJ PATTERN=TRI_TRI6 make test --no-print-directory
 
 test_bitmap:
-	@GRAPH=WV PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=PP PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=CA PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=YT PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=PT PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=LJ PATTERN=CLIQUE4 make test --no-print-directory
-	@GRAPH=WV PATTERN=CLIQUE5 make test --no-print-directory
-	@GRAPH=PP PATTERN=CLIQUE5 make test --no-print-directory
-	@GRAPH=CA PATTERN=CLIQUE5 make test --no-print-directory
-	@GRAPH=YT PATTERN=CLIQUE5 make test --no-print-directory
-	@GRAPH=PT PATTERN=CLIQUE5 make test --no-print-directory
-	@GRAPH=LJ PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=WV PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=WV PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=PP PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=PP PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=CA PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=CA PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=YT PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=YT PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=PT PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=PT PATTERN=CLIQUE5 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=LJ PATTERN=CLIQUE4 make test --no-print-directory
+	@OVERRIDE=${OVERRIDE} @GRAPH=LJ PATTERN=CLIQUE5 make test --no-print-directory

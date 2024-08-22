@@ -5,7 +5,6 @@ graph := wiki-Vote p2p-Gnutella04 ca-AstroPh com-youtube cit-Patents soc-LiveJou
 run_pimpam: data_pimpam ./scripts/run_pimpam.sh
 	@mkdir -p results
 	@bash ./scripts/run_pimpam.sh
-	
 
 run_graphpi: data_graphpi ./scripts/run_graphpi.sh ./graphpi/build/bin/baseline_test
 	@mkdir -p results
@@ -13,6 +12,8 @@ run_graphpi: data_graphpi ./scripts/run_graphpi.sh ./graphpi/build/bin/baseline_
 
 ./graphpi/build/bin/baseline_test:
 	@cd graphpi && mkdir -p build && cd build && cmake .. && make -j
+
+run_pangolin: data_pangolin ./scripts/run_pangolin.sh
 
 # prepare data
 ./data/%.txt:

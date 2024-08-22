@@ -10,7 +10,9 @@
 #define NO_PARTITION_AS_POSSIBLE
 // #define MORE_ACCURATE_MODEL
 #if defined(CLIQUE4) || defined(CLIQUE5)
+#ifndef NO_BITMAP
 #define BITMAP
+#endif
 #endif
 
 #define DATA_DIR "./data/"
