@@ -1,5 +1,51 @@
 graph := wiki-Vote p2p-Gnutella04 ca-AstroPh com-youtube cit-Patents soc-LiveJournal1
 
+.PHONY: all
+
+all: ./reproduce/fig11.pdf ./reproduce/tab3.csv ./reproduce/fig12.pdf ./reproduce/fig13-3.png ./reproduce/fig14.pdf ./reproduce/tab4.py ./reproduce/fig15.pdf ./reproduce/fig16.pdf ./reproduce/fig17.pdf
+
+./reproduce/fig11.pdf: ./scripts/fig11.py ./results/pimpam_time.txt ./results/graphpi_time.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig11.pdf
+
+./reproduce/tab3.csv: ./scripts/tab3.py ./results/pimpam_preprocess.txt ./results/graphpi_preprocess.txt
+	@mkdir -p reproduce
+	@python3 $<
+
+./reproduce/fig12.pdf: ./scripts/fig12.py ./results/pimpam_time.txt ./results/pimpam_no_col.txt ./results/pimpam_no_balance.txt ./results/pimpam_ideal.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig12.pdf
+
+./reproduce/fig13-3.png: ./scripts/fig13.py ./results/accuracy_C4.txt ./results/accuracy_R4.txt ./results/accuracy_T6.txt
+	@mkdir -p reproduce
+	@python3 $<
+
+./reproduce/fig14.pdf: ./scripts/fig14.py ./results/pimpam_bitmap.txt ./results/pimpam_no_bitmap.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig14.pdf
+
+./reproduce/tab4.py: ./scripts/tab4.py ./results/pimpam_time.txt ./results/pimpam_preprocess.txt ./results/pimpam_model_time.txt ./results/pimpam_model_preprocess.txt
+	@mkdir -p reproduce
+	@python3 $<
+
+./reproduce/fig15.pdf: ./scripts/fig15.py ./results/pimpam_threshold_time.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig15.pdf
+
+./reproduce/fig16.pdf: ./scripts/fig16.py ./results/pangolin_time.txt ./results/pimpam_time.txt ./results/pimpam_bitmap.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig16.pdf
+
+./reproduce/fig17.pdf: ./scripts/fig17.py ./results/pimpam_time.txt ./scripts/khuzdul_time.txt
+	@mkdir -p reproduce
+	@python3 $<
+	@rm -rf fig17.pdf
+
 .PHONY: run_pimpam run_graphpi run_pangolin
 
 run_pimpam: data_pimpam ./scripts/run_pimpam.sh

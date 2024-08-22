@@ -9,3 +9,4 @@ pangolin/data
 PimPam/data
 PimPam/result
 PimPam/obj
+scripts/__pycache__

@@ -8,5 +8,5 @@ do
     done
 done
 
-cat results/graphpi_out.txt | grep time | awk '{print $2}' > results/graphpi_times.txt
+cat results/graphpi_out.txt | grep time | awk '{print $2}' > results/graphpi_time.txt
 cat results/graphpi_out.txt | grep preprocess | awk '{print $2}' > results/graphpi_preprocess.txt
