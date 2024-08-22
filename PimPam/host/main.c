@@ -110,7 +110,7 @@ int main() {
     }
     printf("DPU ans: %lu\n", total_ans);
 #ifdef PERF
-    printf("Lower bound: %f\n", (double)total_cycle_ct / NR_DPUS / NR_TASKLETS / 350000);
+    printf("Lower bound: %f\n", (double)total_cycle_ct / NR_DPUS / NR_TASKLETS / 350000000.0);
 #endif
 
     // output result to file
