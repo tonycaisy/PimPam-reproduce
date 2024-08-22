@@ -13,7 +13,12 @@ run_graphpi: data_graphpi ./scripts/run_graphpi.sh ./graphpi/build/bin/baseline_
 ./graphpi/build/bin/baseline_test:
 	@cd graphpi && mkdir -p build && cd build && cmake .. && make -j
 
-run_pangolin: data_pangolin ./scripts/run_pangolin.sh
+run_pangolin: data_pangolin ./scripts/run_pangolin.sh ./pangolin/bin/pangolin/kcl_base
+	@mkdir -p results
+	@bash ./scripts/run_pangolin.sh "$(graph)"
+
+./pangolin/bin/pangolin/kcl_base:
+	@cd pangolin/src/pangolin/clique && make
 
 # prepare data
 ./data/%.txt:
