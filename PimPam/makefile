@@ -9,7 +9,7 @@ BUILD_DIR := bin
 OBJ_DIR := obj
 INC_DIR := include
 
-NR_DPUS ?= 2520
+NR_DPUS ?= 2554
 NR_TASKLETS ?= 16
 GRAPH ?= WV
 PATTERN ?= CLIQUE3

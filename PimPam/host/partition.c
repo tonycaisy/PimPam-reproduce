@@ -244,9 +244,9 @@ static void data_allocate(bitmap_t bitmap) {
 
 void data_compact(struct dpu_set_t set, bitmap_t bitmap) {
     edge_ptr(*dpu_row_ptr)[DPU_N * 2];
-    dpu_row_ptr = malloc(NR_DPUS * DPU_N * 2 * sizeof(edge_ptr));
-    node_t(*dpu_col_idx)[DPU_M * 2];
-    dpu_col_idx = malloc(NR_DPUS * DPU_M * 2 * sizeof(node_t));
+    dpu_row_ptr = malloc((size_t)NR_DPUS * DPU_N * 2 * sizeof(edge_ptr));
+    node_t(*dpu_col_idx)[DPU_M];
+    dpu_col_idx = malloc((size_t)NR_DPUS * DPU_M * sizeof(node_t));
     node_t(*dpu_roots)[DPU_ROOT_NUM];
     dpu_roots = malloc(NR_DPUS * DPU_ROOT_NUM * sizeof(node_t));
 
