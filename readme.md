@@ -11,32 +11,38 @@ This repo aims at reproducing the results of [PimPam](https://people.iiis.tsingh
 1. Comparison to Khuzdul (a distributed framework). (Fig 17)
 
 ## Environment
-PimPam and GraphPi runs on UPMEM. Here is the hardware and software configuration used in the paper:
+PimPam and GraphPi runs on UPMEM. Here is the hardware configuration used in the paper:
 - CPU:  two Intel Xeon Silver 4216 processors with 64 physical cores in total, running at 2.1GHz.
 - Traditional Memory: 4 DIMMs of traditional DDR4 memory, with 256GB capacity and 38.4GB/s bandwidth in total.
-- DPU: 2560 DPUs, running at 350MHz.
+- DPU: 2560 PIM cores, running at 350MHz.
 - PIM Memory: 20 DDR4-2400 DIMMs, with 160GB capacity, containing the DPUs mentioned above.
-- OS: Debian GNU/Linux 10 with kernel version 4.19
-- Host compiler: GCC 8.3.0
-- DPU support: UPMEM SDK 2023.2.0 based on clang 12.0.0.
+
+**Note for ARI reviewers**: Since UPMEM may not be readily available to most of the researchers, we can provide an account access to the machine. Please contact us if needed.
 
 Since UPMEM isn't equipped with GPUs, Pangolin is run on a separate server with the following configuration:
 - CPU: two Intel Xeon Gold 5218R processors (40 physical cores in total)
 - GPU: four NVIDIA RTX 3090 GPUs, each with 24GB memory
-- CUDA: 12.2
 
-Khuzdul is run on a cluster of 8 servers with the following configuration:
+Khuzdul is run on a cluster of 8 servers. Each server has the following configuration:
 - two AMD EPYC 7H12 64-core processors running at 1.5GHz each with 512GB memory
 - 100Gb Ethernet interconnection with TCP/IP protocol
 
+The software dependencies are summarized as follows:
+- OS: Debian GNU/Linux 10 with kernel version 4.19
+- Host compiler: GCC 8.3.0
+- PIM support: UPMEM SDK 2023.2.0 based on clang 12.0.0
+- Open MPI: 4.1.6
+- CUDA: 12.2
+
+
 ## Experiments
 ### Running PimPam Experiments
-The following should be done on UPMEM.
+The following should be done on UPMEM. (You may skip step 2 and 3 if you use the account provided by us.)
 1. Prepare data: Run `make data_pimpam`.
-1. Make sure the system is setup properly: `cd PimPam && make test`.
+1. Install UPMEM SDK. If this hasn't been installed, follow the instructions in its [website](https://sdk.upmem.com/2023.2.0/01_Install.html).
+1. Make sure bad DPUs are disabled. You may first skip this step and return if the next step fails. To find bad DPUs, you may uncomment line 9 of `PimPam/include/common.h` and rerun `make test`. The macro `CPU_RUN` will run the pattern matching on CPU to check which DPU produces the wrong answer.
+1. Run a simple test to make sure the system is setup properly: `cd PimPam && make test`.
 The last line of the output should be `All fine` and the answer should be `608389`.
-To pass the test, UPMEM SDK should be installed properly before this. If not, follow the instructions in its [website](https://sdk.upmem.com/2023.2.0/01_Install.html).
-If you have installed the SDK but the test still fails, there are two possible causes. First, check whether you have access to DPUs (in which case allocation will fail). Second, there are bad DPUs. Find and disable them. You may uncomment line 9 of `PimPam/include/common.h` and rerun `make test`. The macro `CPU_RUN` will run the pattern matching on CPU to check which DPU produces the wrong answer.
 1. Run the experiments: `cd .. && make run_pimpam`. It may take a few hours.
 
 ### Running GraphPi Experiments
@@ -56,7 +62,7 @@ Since Khuzdul is not open sourced, we obtain the code directly from the author t
 The results produced by the experiments above are stored in the `results` directory. Since the experimetns are run on different machines, you should manually combine the `results` directories from each machine into one before proceeding.
 
 ## Reproducing Figures and Tables
-Now we assume all the results have been stored in one place. Then run `make all`. This will produce all the figures and tables mentioned above in `reproduce` directory. If you are able to run only part of the experiments, then you can optionally reproduce some of the figures or tables. Here are the dependencies.
+Now we assume all the results have been stored in one place. First run `pip install -r scripts/requirements.txt` to install the packages. Then run `make all`. This will produce all the figures and tables mentioned above in `reproduce` directory. If you are able to run only part of the experiments, then you can optionally reproduce some of the figures or tables. Here are the dependencies.
 1. `make fig11`: pimpam and graphpi
 1. `make tab3`: pimpam and graphpi
 1. `make fig12`: pimpam
@@ -66,5 +72,3 @@ Now we assume all the results have been stored in one place. Then run `make all`
 1. `make fig15`: pimpam
 1. `make fig16`: pimpam and pangolin
 1. `make fig17`: pimpam
-
-Note that the figures and tables are generated using `matplotlib` and `pandas`. Make sure they are installed before running the commands above.

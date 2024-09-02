@@ -2,13 +2,7 @@ import matplotlib.pyplot as plt
 import re
 import numpy as np
 from collect_data import collect_data
-
-from matplotlib.font_manager import FontProperties, font_family_aliases
-import pandas as pd
 import matplotlib.pyplot as plt
-from IPython.display import Latex
-from pprint import pprint
-import matplotlib.font_manager as fm
 
 # regular expression for matching number
 num_re = re.compile(r"\d+")
