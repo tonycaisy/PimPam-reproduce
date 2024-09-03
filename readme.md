@@ -33,7 +33,7 @@ The software dependencies are summarized as follows:
 - PIM support: UPMEM SDK 2023.2.0 based on clang 12.0.0
 - Open MPI: 4.1.6
 - CUDA: 12.2
-
+- Python3
 
 ## Experiments
 ### Running PimPam Experiments
@@ -53,7 +53,11 @@ The following should be done on UPMEM.
 ### Running Pangolin Experiments
 The following should be done on a server with GPUs.
 1. Make sure the correct `CUDA_ARCH` has been specified at line 7 of `pangolin/src/pangolin/common.mk`. See also line 14 to 24 of `pangolin/src/common.mk`.
-1. Run the experiments: `make run_pangolin`.
+1. Run the experiments: `make run_pangolin`. **Note that running Pangolin on LJ and Clique5 may fail due to out of memory.** Don't worry if you see the following lines:
+```
+Running Pangolin on soc-LiveJournal1 with clique 5
+error 700: ...
+```
 
 ### About Khuzdul
 Since Khuzdul is not open sourced, we obtain the code directly from the author to conduct our experiments. However, we are not authorized to publish the code in this repo. Instead, we provide the results measured before in order to reproduce the figure. Some of the experiments overlap with their original paper, where the statistics support the results we have obtained. Furthermore, comparison to distributed system is only a minor part of our paper, so we believe this is acceptable.
