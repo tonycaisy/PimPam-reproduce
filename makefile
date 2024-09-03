@@ -64,6 +64,7 @@ run_pangolin: data_pangolin ./scripts/run_pangolin.sh ./pangolin/bin/pangolin/kc
 	@bash ./scripts/run_pangolin.sh "$(graph)"
 
 ./pangolin/bin/pangolin/kcl_base:
+	mkdir -p pangolin/bin/pangolin
 	@cd pangolin/src/pangolin/clique && make
 
 # prepare data
