@@ -17,8 +17,6 @@ PimPam and GraphPi runs on UPMEM. Here is the hardware configuration used in the
 - DPU: 2560 PIM cores, running at 350MHz.
 - PIM Memory: 20 DDR4-2400 DIMMs, with 160GB capacity, containing the DPUs mentioned above.
 
-**Note for ARI reviewers**: Since UPMEM may not be readily available to most of the researchers, we can provide an account access to the machine. Please contact us if needed.
-
 Since UPMEM isn't equipped with GPUs, Pangolin is run on a separate server with the following configuration:
 - CPU: two Intel Xeon Gold 5218R processors (40 physical cores in total)
 - GPU: four NVIDIA RTX 3090 GPUs, each with 24GB memory
@@ -37,12 +35,11 @@ The software dependencies are summarized as follows:
 
 ## Experiments
 ### Running PimPam Experiments
-The following should be done on UPMEM. (You may skip step 2 and 3 if you use the account provided by us.)
+The following should be done on UPMEM.
 1. Prepare data: Run `make data_pimpam`.
 1. Install UPMEM SDK. If this hasn't been installed, follow the instructions in its [website](https://sdk.upmem.com/2023.2.0/01_Install.html).
 1. Make sure bad DPUs are disabled. You may first skip this step and return if the next step fails. To find bad DPUs, you may uncomment line 9 of `PimPam/include/common.h` and rerun `make test`. The macro `CPU_RUN` will run the pattern matching on CPU to check which DPU produces the wrong answer.
-1. Run a simple test to make sure the system is setup properly: `cd PimPam && make test`.
-The last line of the output should be `All fine` and the answer should be `608389`.
+1. Run a simple test to make sure the system is setup properly: `cd PimPam && make test`. The last line of the output should be `All fine` and the answer should be `608389`.
 1. Run the experiments: `cd .. && make run_pimpam`. It may take a few hours.
 
 ### Running GraphPi Experiments
