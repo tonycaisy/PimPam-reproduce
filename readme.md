@@ -35,11 +35,14 @@ The software dependencies are summarized as follows:
 
 ## Experiments
 ### Running PimPam Experiments
-The following should be done on UPMEM.
-1. Prepare data: Run `make data_pimpam`.
+First, setup UPMEM. Note that the following instructions are for a new UPMEM machine. You may skip them if it has already been setup before. PimPam does not require modification to the default configuration of UPMEM.
 1. Install UPMEM SDK. If this hasn't been installed, follow the instructions in its [website](https://sdk.upmem.com/2023.2.0/01_Install.html).
+1. The permission to access DPU. Follow the instructions [here](https://sdk.upmem.com/2023.2.0/281_Permissions.html) to setup the permission.
+
+Second, run experiemnts.
+1. Prepare data: Run `make data_pimpam`.
 1. Make sure bad DPUs are disabled. You may first skip this step and return if the next step fails. To find bad DPUs, you may uncomment line 9 of `PimPam/include/common.h` and rerun `make test`. The macro `CPU_RUN` will run the pattern matching on CPU to check which DPU produces the wrong answer.
-1. Run a simple test to make sure the system is setup properly: `cd PimPam && make test`. The last line of the output should be `All fine` and the answer should be `608389`.
+1. Run a simple test to make sure the system is setup properly: `cd PimPam && make test`. The last line of the output should be `All fine` and the answer should be `608389`. In case there are not enough DPUs for allocation, modify line 12 of `PimPam-reproduce/PimPam/makefile` to reduce the number of DPUs used.
 1. Run the experiments: `cd .. && make run_pimpam`. It may take a few hours.
 
 ### Running GraphPi Experiments
